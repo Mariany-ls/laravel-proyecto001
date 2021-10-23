@@ -26,6 +26,13 @@ Route::post('/contacto', function(){
     return "formulario de contacto";
 });
 
-Route::post('/productos', function(){
-    return "Productos";
-});
+Route::get('/productos/{producto?}/{precio?}', function($producto="Bebida", $precio=null){ //con el signo de preguntas no son campos obligatorios
+    return view('productos', array( //vista productos
+        'producto' => $producto,
+        'precio' => $precio
+    ));
+})->where([
+    'producto' => '[A-Za-z]+',
+    'precio' => '[0-9]+'
+]);
+
